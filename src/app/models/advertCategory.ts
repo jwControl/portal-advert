@@ -1,0 +1,1 @@
+export type AdvertCategory = 'DOG' | "CAT" | "BIRD" | "HORSE";

@@ -1,0 +1,5 @@
+@if(adverts$ | async; as adverts) { @if(adverts.length) { @for(advert of
+adverts; track advert.id) {
+<advert-card [advert]="advert"/>
+} } }
+

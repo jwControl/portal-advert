@@ -1,0 +1,27 @@
+.back-button-container {
+  padding: 1rem;
+  button {
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+}
+
+.img-container {
+  width: 100%;
+}
+img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  aspect-ratio: 4 / 3;
+}
+
+.info-container {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description {
+  margin: 1rem;
+}
