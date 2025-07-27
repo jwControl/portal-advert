@@ -6,7 +6,7 @@ import { AnimalAdvert } from '../models/animalAdvert';
 @Injectable({
   providedIn: 'root',
 })
-export class AdvertsService {
+export class AnimalAdvertService {
   httpClient = inject(HttpClient);
 
   public getAdvertsFromApi(): Observable<AnimalAdvert[]> {
@@ -19,5 +19,26 @@ export class AdvertsService {
     return this.httpClient.get<AnimalAdvert>(
       `http://localhost:9000/api/adverts/${advertId}`
     );
+  }
+  public searchAdvertByQuery(
+    query?: string,
+    category?: string
+  ): Observable<AnimalAdvert[]> {
+    const params: any = {};
+
+    if (query) {
+      params.query = query;
+    }
+
+    if (category) {
+      params.category = category;
+    }
+
+    return this.httpClient
+      .get<{ adverts: AnimalAdvert[] }>(
+        'http://localhost:9000/api/search-adverts',
+        { params }
+      )
+      .pipe(map((response) => response.adverts));
   }
 }

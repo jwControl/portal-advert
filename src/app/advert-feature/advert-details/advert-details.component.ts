@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AdvertsService } from '../../services/adverts.service';
+import { AnimalAdvertService } from '../../services/animalAdvert.service';
 import { Observable } from 'rxjs';
 import { Advert } from '../../models/advert';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
@@ -20,7 +20,7 @@ export class AdvertDetailsComponent implements OnInit {
   advertDetails$!: Observable<AnimalAdvert>;
   constructor(
     private route: ActivatedRoute,
-    private advertsService: AdvertsService,
+    private advertsService: AnimalAdvertService,
     private location: Location
   ) {}
 

@@ -1,1 +1,6 @@
-export type AnimalCategory = 'DOG' | 'CAT' | 'BIRD' | 'HORSE';
+export enum AnimalCategory {
+  DOG = 'DOG',
+  CAT = 'CAT',
+  BIRD = 'BIRD',
+  HORSE = 'HORSE',
+}

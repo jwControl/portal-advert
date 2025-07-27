@@ -1,0 +1,14 @@
+<mat-form-field appearance="fill">
+  <mat-label>Select Category</mat-label>
+  <mat-select
+    [(ngModel)]="selectedCategory"
+    (selectionChange)="onSelectionChange($event)"
+  >
+    <mat-option [value]=""> --Reset Category--</mat-option>
+    @for(category of categories; track $index) {
+    <mat-option [value]="category">
+      {{ category }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

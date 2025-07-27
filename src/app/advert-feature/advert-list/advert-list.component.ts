@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AdvertsService } from '../../services/adverts.service';
+import { AnimalAdvertService } from '../../services/animalAdvert.service';
 import { Observable } from 'rxjs';
 import { Advert } from '../../models/advert';
 import { AsyncPipe } from '@angular/common';
@@ -14,7 +14,7 @@ import { AnimalAdvert } from '../../models/animalAdvert';
   styleUrl: './advert-list.component.scss',
 })
 export class AdvertListComponent {
-  advertService = inject(AdvertsService);
+  advertService = inject(AnimalAdvertService);
 
   adverts$: Observable<AnimalAdvert[]> = this.advertService.getAdvertsFromApi();
 }
