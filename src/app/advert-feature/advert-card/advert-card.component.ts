@@ -1,9 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Advert } from '../../models/advert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { AnimalAdvert } from '../../models/animalAdvert';
 
 @Component({
   selector: 'advert-card',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class AdvertCardComponent {
-  @Input() advert!: Advert;
+  @Input() advert!: AnimalAdvert;
 
   constructor(private router: Router) {}
 

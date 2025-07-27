@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Advert } from '../models/advert';
 import { HttpClient } from '@angular/common/http';
+import { AnimalAdvert } from '../models/animalAdvert';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +9,14 @@ import { HttpClient } from '@angular/common/http';
 export class AdvertsService {
   httpClient = inject(HttpClient);
 
-  public getAdvertsFromApi(): Observable<Advert[]> {
+  public getAdvertsFromApi(): Observable<AnimalAdvert[]> {
     return this.httpClient
-      .get<{ adverts: Advert[] }>('http://localhost:9000/api/adverts')
+      .get<{ adverts: AnimalAdvert[] }>('http://localhost:9000/api/adverts')
       .pipe(map((response) => response.adverts));
   }
 
-  public getAdvertDetailsFromApi(advertId: number): Observable<Advert> {
-    return this.httpClient.get<Advert>(
+  public getAdvertDetailsFromApi(advertId: number): Observable<AnimalAdvert> {
+    return this.httpClient.get<AnimalAdvert>(
       `http://localhost:9000/api/adverts/${advertId}`
     );
   }

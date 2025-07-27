@@ -7,6 +7,7 @@ import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AnimalAdvert } from '../../models/animalAdvert';
 
 @Component({
   selector: 'advert-details',
@@ -16,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdvertDetailsComponent implements OnInit {
   advertId!: number;
-  advertDetails$!: Observable<Advert>;
+  advertDetails$!: Observable<AnimalAdvert>;
   constructor(
     private route: ActivatedRoute,
     private advertsService: AdvertsService,

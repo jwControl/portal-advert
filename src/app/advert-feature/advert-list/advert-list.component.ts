@@ -5,6 +5,7 @@ import { Advert } from '../../models/advert';
 import { AsyncPipe } from '@angular/common';
 import { AdvertCardComponent } from '../advert-card/advert-card.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AnimalAdvert } from '../../models/animalAdvert';
 
 @Component({
   selector: 'advert-list',
@@ -15,5 +16,5 @@ import { MatButtonModule } from '@angular/material/button';
 export class AdvertListComponent {
   advertService = inject(AdvertsService);
 
-  adverts$: Observable<Advert[]> = this.advertService.getAdvertsFromApi();
+  adverts$: Observable<AnimalAdvert[]> = this.advertService.getAdvertsFromApi();
 }
