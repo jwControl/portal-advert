@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {
@@ -16,11 +16,16 @@ import {
   styleUrl: './search-query.component.scss',
 })
 export class SearchQueryComponent implements OnInit {
-  searchByQuery = new FormControl('');
+  @Input() initialQuery: string = ''; // Accept initial value from parent
   @Output() searchChanged = new EventEmitter<string>();
+
+  searchByQuery = new FormControl('');
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
+    // Set the initial value for the search input
+    this.searchByQuery.setValue(this.initialQuery);
+
     this.searchByQuery.valueChanges
       .pipe(
         debounceTime(500),

@@ -1,4 +1,10 @@
 <div class="search-container">
-  <search-category (categorySelected)="onCategorySelected($event)" />
-  <search-query (searchChanged)="onQuerySelected($event)" />
+  <search-category
+    [selectedCategory]="selectedCategory"
+    (categorySelected)="onCategorySelected($event)"
+  ></search-category>
+  <search-query
+    [initialQuery]="searchQuery"
+    (searchChanged)="onQuerySelected($event)"
+  ></search-query>
 </div>

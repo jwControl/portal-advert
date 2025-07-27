@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SearchCategoryComponent } from './search-category/search-category.component';
 import { SearchQueryComponent } from './search-query/search-query.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AnimalAdvertService } from '../../services/animalAdvert.service';
+import { AdvertsStoreService } from '../../services/adverts.store.service';
+import { SearchStoreService } from '../../services/search.store.service';
 
 @Component({
   selector: 'search',
@@ -10,24 +11,33 @@ import { AnimalAdvertService } from '../../services/animalAdvert.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent {
-  advertService = inject(AnimalAdvertService);
+export class SearchComponent implements OnInit {
+  advertsStore = inject(AdvertsStoreService);
+  searchStore = inject(SearchStoreService);
+
   selectedCategory: string = '';
   searchQuery: string = '';
 
+  ngOnInit(): void {
+    // Restore search terms from the store
+    this.selectedCategory = this.searchStore.getCategory();
+    this.searchQuery = this.searchStore.getQuery();
+
+  }
+
   public onCategorySelected(selectedCategory: string) {
     this.selectedCategory = selectedCategory;
+    this.searchStore.setCategory(selectedCategory); // Save category to the store
     this.searchAdverts();
   }
 
   public onQuerySelected(query: string) {
     this.searchQuery = query;
+    this.searchStore.setQuery(query); // Save query to the store
     this.searchAdverts();
   }
 
   private searchAdverts() {
-    this.advertService
-      .searchAdvertByQuery(this.searchQuery, this.selectedCategory)
-      .subscribe(console.log);
+    this.advertsStore.searchAdverts(this.searchQuery, this.selectedCategory);
   }
 }

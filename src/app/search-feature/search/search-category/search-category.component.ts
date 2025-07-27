@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { AnimalCategory } from '../../../models/animalCategory';
@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './search-category.component.scss',
 })
 export class SearchCategoryComponent {
-  categories = Object.values(AnimalCategory);
-  selectedCategory: string = '';
+  @Input() selectedCategory: string = ''; // Accept initial value from parent
   @Output() categorySelected = new EventEmitter<string>();
 
+  categories = Object.values(AnimalCategory);
+
   onSelectionChange(event: MatSelectChange) {
-    this.categorySelected.emit(this.selectedCategory); // Emit the updated value
+    this.categorySelected.emit(event.value); // Emit the updated value
   }
 }

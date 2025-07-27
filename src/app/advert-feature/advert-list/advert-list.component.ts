@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { AnimalAdvertService } from '../../services/animalAdvert.service';
 import { Observable } from 'rxjs';
-import { Advert } from '../../models/advert';
 import { AsyncPipe } from '@angular/common';
 import { AdvertCardComponent } from '../advert-card/advert-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AnimalAdvert } from '../../models/animalAdvert';
+import { AdvertsStoreService } from '../../services/adverts.store.service';
 
 @Component({
   selector: 'advert-list',
@@ -14,7 +13,7 @@ import { AnimalAdvert } from '../../models/animalAdvert';
   styleUrl: './advert-list.component.scss',
 })
 export class AdvertListComponent {
-  advertService = inject(AnimalAdvertService);
+  advertStore = inject(AdvertsStoreService);
 
-  adverts$: Observable<AnimalAdvert[]> = this.advertService.getAdvertsFromApi();
+  adverts$: Observable<AnimalAdvert[]> = this.advertStore.adverts$;
 }
