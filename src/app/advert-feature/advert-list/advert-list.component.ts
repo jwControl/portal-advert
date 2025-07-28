@@ -4,7 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { AdvertCardComponent } from '../advert-card/advert-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AnimalAdvert } from '../../models/animalAdvert';
-import { AdvertsStoreService } from '../../services/adverts.store.service';
+import { AdvertsStoreService } from '../../services/store/adverts.store.service';
 
 @Component({
   selector: 'advert-list',

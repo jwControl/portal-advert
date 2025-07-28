@@ -1,0 +1,78 @@
+
+<div class="back-button">
+  <button mat-button color="primary" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Back
+  </button>
+</div>
+<form [formGroup]="advertForm" (ngSubmit)="saveAdvert()" class="advert-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Enter title" />
+    @if(advertForm.get('title')?.invalid) {
+    <mat-error>
+      Title is required and must be less than 100 characters.
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="longDescription"
+      placeholder="Enter description"
+    ></textarea>
+    @if(advertForm.get('longDescription')?.invalid) {
+    <mat-error>
+      Description is required and must be less than 3000 characters.
+    </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Photo URL</mat-label>
+    <input matInput formControlName="photoUrl" placeholder="Enter photo URL" />
+    @if(advertForm.get('photoUrl')?.invalid) {
+    <mat-error> A valid URL is required. </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      @for(category of categories; track $index) {
+      <mat-option [value]="category">
+        {{ category }}
+      </mat-option>
+      }
+    </mat-select>
+    @if(advertForm.get('category')?.invalid) {
+    <mat-error> Category is required. </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Price [EUR]</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="price"
+      placeholder="Enter price"
+    />
+    @if(advertForm.get('price')?.hasError('required')) {
+    <mat-error> Price is required. </mat-error>
+    } @if(advertForm.get('price')?.hasError('pattern')) {
+    <mat-error> Price must be an integer. </mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="advertForm.invalid"
+  >
+    Save
+  </button>
+</form>

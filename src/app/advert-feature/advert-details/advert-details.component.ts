@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimalAdvertService } from '../../services/animalAdvert.service';
 import { Observable } from 'rxjs';
-import { Advert } from '../../models/advert';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';

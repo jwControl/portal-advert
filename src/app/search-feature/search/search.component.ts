@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SearchCategoryComponent } from './search-category/search-category.component';
 import { SearchQueryComponent } from './search-query/search-query.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdvertsStoreService } from '../../services/adverts.store.service';
-import { SearchStoreService } from '../../services/search.store.service';
+import { AdvertsStoreService } from '../../services/store/adverts.store.service';
+import { SearchStoreService } from '../../services/store/search.store.service';
 
 @Component({
   selector: 'search',
@@ -22,7 +22,6 @@ export class SearchComponent implements OnInit {
     // Restore search terms from the store
     this.selectedCategory = this.searchStore.getCategory();
     this.searchQuery = this.searchStore.getQuery();
-
   }
 
   public onCategorySelected(selectedCategory: string) {

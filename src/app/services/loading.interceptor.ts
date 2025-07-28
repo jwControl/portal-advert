@@ -6,8 +6,9 @@ import {
   HttpEvent,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { LoadingService } from './loading.service';
+import { SkipLoading } from './skipLoading';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
@@ -17,11 +18,15 @@ export class LoadingInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    // Check if the skipLoading flag is set in the context
+    const skipLoading = req.context.get(SkipLoading);
+
+    if (skipLoading) {
+      return next.handle(req);
+    }
     this.loadingService.startLoading();
-    console.log('START');
     return next.handle(req).pipe(
       finalize(() => this.loadingService.stopLoading()),
-      tap(() => console.log('STOP'))
     );
   }
 }

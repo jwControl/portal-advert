@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { AnimalAdvert } from '../models/animalAdvert';
+import { SkipLoading } from './skipLoading';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,20 @@ export class AnimalAdvertService {
       `http://localhost:9000/api/adverts/${advertId}`
     );
   }
+
+  public updateAdvert(
+    advertId: number,
+    updatedAdvert: Partial<AnimalAdvert>
+  ): Observable<AnimalAdvert> {
+    return this.httpClient.put<AnimalAdvert>(
+      `http://localhost:9000/api/adverts/${advertId}`,
+      updatedAdvert,
+      {
+        context: new HttpContext().set(SkipLoading, true),
+      }
+    );
+  }
+
   public searchAdvertByQuery(
     query?: string,
     category?: string
@@ -40,5 +55,15 @@ export class AnimalAdvertService {
         { params }
       )
       .pipe(map((response) => response.adverts));
+  }
+
+  public createNewAdvert(advert: AnimalAdvert): Observable<AnimalAdvert> {
+    return this.httpClient.post<AnimalAdvert>(
+      'http://localhost:9000/api/adverts',
+      advert,
+      {
+        context: new HttpContext().set(SkipLoading, true),
+      }
+    );
   }
 }

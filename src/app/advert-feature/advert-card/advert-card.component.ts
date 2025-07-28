@@ -4,10 +4,11 @@ import { MatCardModule } from '@angular/material/card';
 import { CurrencyPipe, DatePipe, JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { AnimalAdvert } from '../../models/animalAdvert';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'advert-card',
-  imports: [MatCardModule, MatButtonModule, CurrencyPipe, DatePipe],
+  imports: [MatCardModule, MatButtonModule, CurrencyPipe, DatePipe, MatIcon],
   templateUrl: './advert-card.component.html',
   styleUrl: './advert-card.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -20,6 +21,12 @@ export class AdvertCardComponent {
   showCardDetails(advertId: number) {
     this.router.navigate(['/advert-details'], {
       queryParams: { id: advertId },
+    });
+  }
+
+  editAdvert(advertId: number) {
+    this.router.navigate(['/add-advert'], {
+       queryParams: { id: advertId },
     });
   }
 }
