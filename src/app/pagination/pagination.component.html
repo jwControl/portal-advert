@@ -1,0 +1,21 @@
+<div class="pagination-container">
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    (click)="previousPage()"
+    [disabled]="currentPage === 1"
+  >
+    Previous
+  </button>
+  <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+  >
+    Next
+  </button>
+</div>

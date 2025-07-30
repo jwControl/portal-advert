@@ -60,10 +60,7 @@ export class AnimalAdvertService {
   public createNewAdvert(advert: AnimalAdvert): Observable<AnimalAdvert> {
     return this.httpClient.post<AnimalAdvert>(
       'http://localhost:9000/api/adverts',
-      advert,
-      {
-        context: new HttpContext().set(SkipLoading, true),
-      }
+      advert
     );
   }
 }

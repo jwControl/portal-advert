@@ -4,6 +4,8 @@ import { SearchQueryComponent } from './search-query/search-query.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdvertsStoreService } from '../../services/store/adverts.store.service';
 import { SearchStoreService } from '../../services/store/search.store.service';
+import { Store } from '@ngrx/store';
+import { setSearch } from '../../store/actions/searchActions.actions';
 
 @Component({
   selector: 'search',
@@ -14,6 +16,7 @@ import { SearchStoreService } from '../../services/store/search.store.service';
 export class SearchComponent implements OnInit {
   advertsStore = inject(AdvertsStoreService);
   searchStore = inject(SearchStoreService);
+  store = inject(Store);
 
   selectedCategory: string = '';
   searchQuery: string = '';
@@ -37,6 +40,9 @@ export class SearchComponent implements OnInit {
   }
 
   private searchAdverts() {
-    this.advertsStore.searchAdverts(this.searchQuery, this.selectedCategory);
+    this.store.dispatch(
+      setSearch({ category: this.selectedCategory, query: this.searchQuery })
+    );
+    this.store.select((state) => state).subscribe(console.log);
   }
 }
