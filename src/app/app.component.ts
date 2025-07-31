@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
   store = inject<Store<AppState>>(Store);
   ngOnInit(): void {
     // this.storeAdverts.loadAdverts().subscribe();
-    
-    this.store.dispatch(loadAdverts())
+
+    this.store.dispatch(loadAdverts());
+    this.store.select((state) => state).subscribe(console.log);
   }
 }

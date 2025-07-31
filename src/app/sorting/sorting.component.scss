@@ -1,0 +1,17 @@
+.sorting-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-form-field {
+  width: 100%;
+  max-width: 200px;
+}
+
+mat-select {
+  font-size: 16px;
+}
+
+mat-option {
+  font-size: 14px;
+}

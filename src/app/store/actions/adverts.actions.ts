@@ -39,5 +39,10 @@ export const updateAdvertFailure = createAction(
   props<{ error: Error }>()
 );
 
+export const sortAdverts = createAction(
+  AdvertTypesActions.SORT,
+  props<{option: string}>()
+)
+
 
 export * as AdvertActions from './adverts.actions';

@@ -43,6 +43,6 @@ export class SearchComponent implements OnInit {
     this.store.dispatch(
       setSearch({ category: this.selectedCategory, query: this.searchQuery })
     );
-    this.store.select((state) => state).subscribe(console.log);
+  
   }
 }

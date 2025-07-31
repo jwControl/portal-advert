@@ -27,20 +27,18 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' })),
-    provideStore(reducers, 
-      {
-        runtimeChecks: {
-          strictStateImmutability: true,
-          strictActionImmutability: true,
-        },
-      }
-    ),
+    provideStore(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
     provideStoreDevtools({
       name: 'Adverts store',
       maxAge: 25,
       logOnly: !isDevMode(),
+      trace: true,
     }),
     provideEffects([AdvertsEffects]),
   ],
 };
-

@@ -1,0 +1,16 @@
+@if(selectedOption$ | async; as selectedOption) {
+<div class="sorting-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Sort By</mat-label>
+    <mat-select
+      [value]="selectedOption"
+      (selectionChange)="onSelectChange($event.value)"
+    >
+      @for(option of sortingOptions; track $index) {
+      <mat-option [value]="option.value">{{ option.label }}</mat-option>
+
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+}
