@@ -1,4 +1,12 @@
-@if(adverts$ | async; as adverts) { @if(adverts.length) { @for(advert of
+@if(adverts$ | async; as adverts) { @if(adverts.length)
+ {
+    
+<div class="card-container">
+  <div class="card-element">
+    <sorting></sorting>
+  </div>
+</div>
+    @for(advert of
 adverts; track advert.id) {
 <advert-card [advert]="advert"/>
 } } }

@@ -19,6 +19,7 @@ import { provideEffects } from '@ngrx/effects';
 import { AdvertsEffects } from './store/effects/advertEffects';
 
 import { reducers } from './store/reducers';
+import { LoginEffect } from './store/effects/loginEffects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,8 +30,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' })),
     provideStore(reducers, {
       runtimeChecks: {
+        //make state immutable always, do a copy 
         strictStateImmutability: true,
+        //actions cannot be mytable as well
         strictActionImmutability: true,
+        strictActionSerializability: true,
       },
     }),
     provideStoreDevtools({
@@ -39,6 +43,6 @@ export const appConfig: ApplicationConfig = {
       logOnly: !isDevMode(),
       trace: true,
     }),
-    provideEffects([AdvertsEffects]),
+    provideEffects([AdvertsEffects, LoginEffect]),
   ],
 };

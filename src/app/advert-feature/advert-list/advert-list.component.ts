@@ -8,11 +8,12 @@ import { AdvertsStoreService } from '../../services/store/adverts.store.service'
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state';
 import { selectAllAdverts } from '../../store/selectors/adverts.selector';
+import { SortingComponent } from '../../sorting/sorting.component';
 
 
 @Component({
   selector: 'advert-list',
-  imports: [AsyncPipe, AdvertCardComponent, MatButtonModule],
+  imports: [AsyncPipe, AdvertCardComponent, MatButtonModule, SortingComponent],
   templateUrl: './advert-list.component.html',
   styleUrl: './advert-list.component.scss',
 })

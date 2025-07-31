@@ -22,3 +22,5 @@ export const SEARCH_FAILURE = '[Search] Set search element failure';
 export const NEXT_PAGE = "[Pagination] Set next page"; 
 export const PREVIOUS_PAGE = "[Pagination] Set previous page"; 
 export const SORT = "[Sorting] Set sorting option"; 
+
+

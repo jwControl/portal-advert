@@ -15,4 +15,7 @@ export class NavigationHeaderComponent {
   navigateToAddAdvert() {
     this.router.navigate(['/add-advert']); 
   }
+  navigateToLogin() {
+    this.router.navigate(["/login"])
+  }
 }

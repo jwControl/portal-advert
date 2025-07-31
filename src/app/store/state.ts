@@ -1,4 +1,5 @@
 import { AdvertsState } from './reducers/adverts.reducers';
+import { LoginState } from './reducers/login.reducer';
 import { PaginationState } from './reducers/pagination.reducer';
 import { SearchState } from './reducers/search.reducer';
 import { SortState } from './reducers/sort.reducer';
@@ -8,4 +9,5 @@ export interface AppState {
   search: SearchState;
   pagination: PaginationState;
   sorting: SortState;
+  auth: LoginState
 }
