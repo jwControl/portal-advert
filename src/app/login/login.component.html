@@ -1,4 +1,9 @@
 <div class="login-container">
+      @if(error$ | async; as error) {
+  <div class="error-notification">
+    <mat-error>{{ error.message }}</mat-error>
+  </div>
+  }
   <mat-card class="login-card">
     <mat-card-title>Login</mat-card-title>
     <mat-card-content>
@@ -35,4 +40,5 @@
       </form>
     </mat-card-content>
   </mat-card>
+
 </div>

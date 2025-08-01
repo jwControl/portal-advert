@@ -10,7 +10,7 @@ export const loadAdvertsSuccess = createAction(
 );
 export const loadAdvertsFailure = createAction(
   AdvertTypesActions.LOAD_ADVERTS_FAILURE,
-  props<{ error: Error }>()
+  props<{ error: {message: string} }>()
 );
 
 export const addAdvert = createAction(
@@ -23,7 +23,7 @@ export const addAdvertsSuccess = createAction(
 );
 export const addAdvertFailure = createAction(
   AdvertTypesActions.ADD_ADVERT_FAILURE,
-  props<{ error: Error }>()
+  props<{ error: {message: string} }>()
 );
 
 export const updateAdvert = createAction(
@@ -36,7 +36,7 @@ export const updateAdvertSuccess = createAction(
 );
 export const updateAdvertFailure = createAction(
   AdvertTypesActions.UPDATE_ADVERT_FAILURE,
-  props<{ error: Error }>()
+  props<{ error: {message: string} }>()
 );
 
 export const sortAdverts = createAction(

@@ -1,13 +1,19 @@
 <mat-toolbar color="primary" class="navigation-bar">
   <span class="app-name">Zoo Portal</span>
   <span class="spacer"></span>
+  @if(isLoggedIn$ | async; as isLoggedIn) {
   <div class="buttons-container">
-  <button mat-raised-button color="accent" (click)="navigateToAddAdvert()">
-    Add Advert
-  </button>
-    <button mat-raised-button color="warn" (click)="navigateToLogin()">
+    <button mat-raised-button color="accent" (click)="navigateToAddAdvert()">
+      Add Advert
+    </button>
+    <button mat-raised-button color="warn" (click)="logoutUser()">
+      Logout
+    </button>
+  </div>
+  } @else {
+  <button mat-raised-button color="warn" (click)="navigateToLogin()">
     Login
   </button>
-  </div>
 
+  }
 </mat-toolbar>

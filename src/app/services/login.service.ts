@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../models/user';
+import { User, UserResponse } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class LoginService {
 
  httpClient = inject(HttpClient);
 
-   public login(userName: string, password: string): Observable<User> {
-     return this.httpClient.post<User>(
+   public login(userName: string, password: string): Observable<UserResponse> {
+     return this.httpClient.post<UserResponse>(
        'http://localhost:9000/api/login',
        {email: userName, password: password}
      );

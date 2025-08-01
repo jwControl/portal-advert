@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { LoginActions } from '../store/actions/login.action';
+import { filter, Observable, tap } from 'rxjs';
+import {
+  selectLoginError,
+} from '../store/selectors/login.selector';
+import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -20,11 +26,15 @@ import { LoginActions } from '../store/actions/login.action';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    AsyncPipe,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent  {
+  store = inject(Store);
+  router = inject(Router);
+
   profileForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', [
@@ -32,18 +42,23 @@ export class LoginComponent {
       Validators.minLength(8),
     ]),
   });
-  store = inject(Store);
 
-  onSubmit() {
-    console.log('Username:', this.profileForm.value.username);
-    console.log('Password:', this.profileForm.value.password);
-    if (this.profileForm.value.username && this.profileForm.value.password) {
-      this.store.dispatch(
-        LoginActions.login({
-          userName: this.profileForm.value.username,
-          password: this.profileForm.value.password,
-        })
-      );
+  readonly error$: Observable<any> = this.store
+    .select(selectLoginError)
+    .pipe(filter((error) => error !== null));
+
+
+
+  onSubmit(): void {
+    const { username, password } = this.profileForm.value;
+    if (username && password) {
+      this.dispatchLogin(username, password);
     }
+  }
+
+  private dispatchLogin(username: string, password: string): void {
+    this.store.dispatch(
+      LoginActions.login({ userName: username, password: password })
+    );
   }
 }
