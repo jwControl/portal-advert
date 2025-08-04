@@ -11,13 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AnimalCategory } from '../../models/animalCategory';
-import { AdvertsStoreService } from '../../services/store/adverts.store.service';
+
 import { MatIconModule } from '@angular/material/icon';
 import { Location } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/state';
-import { addAdvert, updateAdvert } from '../../store/actions/adverts.actions';
-import { selectAdvertById } from '../../store/selectors/adverts.selector';
+import { AdvertsStoreService } from '../../services/advertsStore.servcie';
 
 @Component({
   selector: 'advert-create-edit',
@@ -37,12 +34,11 @@ export class AdvertCreateEditComponent implements OnInit {
   isEditMode: boolean = false;
   categories = Object.values(AnimalCategory);
   formBuilder = inject(FormBuilder);
-  advertStore = inject(AdvertsStoreService);
   router = inject(Router);
   location = inject(Location);
   route = inject(ActivatedRoute);
   advertId: number;
-  store = inject(Store<AppState>);
+  advertStore = inject(AdvertsStoreService);
 
   ngOnInit(): void {
     this.advertForm = this.formBuilder.group({
@@ -63,7 +59,7 @@ export class AdvertCreateEditComponent implements OnInit {
 
     if (this.advertId) {
       this.isEditMode = true;
-      this.store.select(selectAdvertById(this.advertId)).subscribe((adv) => {
+      this.advertStore.advertById(this.advertId).subscribe((adv) => {
         if (adv) {
           this.advertForm.patchValue(adv);
         }
@@ -82,10 +78,8 @@ export class AdvertCreateEditComponent implements OnInit {
       };
       debugger;
       this.isEditMode
-        ? this.store.dispatch(
-            updateAdvert({ advertId: this.advertId, changes: advertToSave })
-          )
-        : this.store.dispatch(addAdvert({ advert: advertToSave }));
+        ? this.advertStore.dispatchEditAdvert(this.advertId, advertToSave)
+        : this.advertStore.dispatchAddAdvert(advertToSave);
       // Redirect to the main page after saving
       this.router.navigate(['/home']);
     } else {

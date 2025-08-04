@@ -11,7 +11,7 @@ export class AdvertsEffects {
   actions$ = inject(Actions);
   advertService = inject(AnimalAdvertService);
 
-  loadAdverts$ = createEffect(() =>
+loadAdverts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AdvertActions.loadAdverts),
       switchMap(() =>
@@ -58,7 +58,7 @@ export class AdvertsEffects {
   filterAdverts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.setSearch),
-      concatMap(({ category, query }) =>
+      switchMap(({ category, query }) =>
         this.advertService.searchAdvertByQuery(query, category).pipe(
           map((filtererdAdverts) =>
             AdvertActions.loadAdvertsSuccess({ adverts: filtererdAdverts })

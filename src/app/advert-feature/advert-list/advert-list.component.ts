@@ -4,12 +4,12 @@ import { AsyncPipe } from '@angular/common';
 import { AdvertCardComponent } from '../advert-card/advert-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AnimalAdvert } from '../../models/animalAdvert';
-import { AdvertsStoreService } from '../../services/store/adverts.store.service';
+
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state';
 import { selectAllAdverts } from '../../store/selectors/adverts.selector';
 import { SortingComponent } from '../../sorting/sorting.component';
-
+import { AdvertsStoreService } from '../../services/advertsStore.servcie';
 
 @Component({
   selector: 'advert-list',
@@ -17,15 +17,13 @@ import { SortingComponent } from '../../sorting/sorting.component';
   templateUrl: './advert-list.component.html',
   styleUrl: './advert-list.component.scss',
 })
-export class AdvertListComponent implements OnInit{
-
+export class AdvertListComponent implements OnInit {
+  //facadePattern
   advertStore = inject(AdvertsStoreService);
-  store = inject<Store<AppState>>(Store);
+  // store = inject<Store<AppState>>(Store);
 
   // lightweight store
   // adverts$: Observable<AnimalAdvert[]> = this.advertStore.adverts$;
-  adverts$: Observable<AnimalAdvert[]>  = this.store.select(selectAllAdverts);
-    ngOnInit(): void {
- 
-  }
+  adverts$: Observable<AnimalAdvert[]> = this.advertStore.adverts$;
+  ngOnInit(): void {}
 }

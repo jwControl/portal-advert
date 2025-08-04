@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SearchCategoryComponent } from './search-category/search-category.component';
 import { SearchQueryComponent } from './search-query/search-query.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdvertsStoreService } from '../../services/store/adverts.store.service';
 import { SearchStoreService } from '../../services/store/search.store.service';
 import { Store } from '@ngrx/store';
 import { setSearch } from '../../store/actions/searchActions.actions';
@@ -14,7 +13,6 @@ import { setSearch } from '../../store/actions/searchActions.actions';
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
-  advertsStore = inject(AdvertsStoreService);
   searchStore = inject(SearchStoreService);
   store = inject(Store);
 
@@ -29,13 +27,11 @@ export class SearchComponent implements OnInit {
 
   public onCategorySelected(selectedCategory: string) {
     this.selectedCategory = selectedCategory;
-    this.searchStore.setCategory(selectedCategory); // Save category to the store
     this.searchAdverts();
   }
 
   public onQuerySelected(query: string) {
     this.searchQuery = query;
-    this.searchStore.setQuery(query); // Save query to the store
     this.searchAdverts();
   }
 
@@ -43,6 +39,5 @@ export class SearchComponent implements OnInit {
     this.store.dispatch(
       setSearch({ category: this.selectedCategory, query: this.searchQuery })
     );
-  
   }
 }

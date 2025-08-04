@@ -13,7 +13,6 @@ export const initialState: SearchState = {
 export const searchReducer = createReducer(
   initialState,
   on(SearchActions.setSearch, (state, { category, query }) => {
-    console.log('Reducer hit with search:', category, query);
     return {
       ...state,
       selectedCategory: category,

@@ -27,7 +27,6 @@ export const selectAllAdverts = createSelector(
     sortState: SortState
   ) => {
     let adverts = [...advertsState.adverts];
-
     // Apply sorting based on sortingOption
     switch (sortState.sortingOption) {
       case SortOption.NEWEST:
@@ -48,6 +47,7 @@ export const selectAllAdverts = createSelector(
       (paginationState.currentPage - 1) *
       paginationState.numberOfElementPerPage;
     const endIndex = startIndex + paginationState.numberOfElementPerPage;
+
 
     return [...adverts].slice(startIndex, endIndex);
   }
